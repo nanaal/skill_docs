@@ -1,0 +1,24 @@
+#this file foucus on SSH/Password issues
+1. cannot login to host via root accout with right password
+method 1:
+1)check the algorithm which is used in /etc/shadow, below is an example in /etc/shadow:
+root:$1$xyz$vDWSBUgNH2PMgEmLoHEEi.:16917:0:99999:7:::
+this line is splited with ":", the first part is the user name, the second part($?$) is the algorithm type which is used in /etc/shadow
+execute command " man 3 crypt", you can see below info:
+If  salt is a character string starting with the characters "$id$" fol‐ 
+       lowed by a string terminated by "$": 
+
+              $id$salt$encrypted
+
+       then instead of using the DES machine,  id  identifies  the  encryption 
+       method  used  and  this  then  determines  how the rest of the password 
+       string is interpreted.  The following values of id are supported:
+
+              ID  | Method 
+              ───────────────────────────────────────── 
+              1   | MD5 
+              2a  | Blowfish (not in mainline glibc; added in some 
+                  | Linux distributions) 
+              5   | SHA-256 (since glibc 2.7) 
+              6   | SHA-512 (since glibc 2.7) 
+2)modify /etc/shadow file via changing the algorithm
