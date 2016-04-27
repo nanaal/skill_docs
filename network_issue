@@ -22,3 +22,6 @@ If  salt is a character string starting with the characters "$id$" fol‐
               5   | SHA-256 (since glibc 2.7) 
               6   | SHA-512 (since glibc 2.7) 
 2)modify /etc/shadow file via changing the algorithm
+3)encrypt your password with below command:
+python -c "import crypt, getpass, pwd; print crypt.crypt('123456', '\$6\$L0Uymjwa\$')"
+Note:123456 is your password, $6$ is the algorithm type you choose, $L0Uymjwa$ is the salt you can find in file /etc/shadow
